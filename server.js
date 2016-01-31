@@ -107,11 +107,11 @@ io.sockets.on('connection', function (socket) {
 	    });
 	socket.on('paint', function(msg){		
 		if(canPlace(msg.posX,msg.posY,pmap[teamID])){
-			if( data[msg.posY][msg.posX]  == 0){
+			if( data[msg.posY][msg.posX] == 0){
             	data[msg.posY][msg.posX] = pmap[teamID];
-			} else {
+			} else if( data[msg.posY][msg.posX] != pmap[teamID]){
             	data[msg.posY][msg.posX] = 0;
-			}
+			} 
 			playerClicks++;
 			totalClicks++;
 			checkWin();
