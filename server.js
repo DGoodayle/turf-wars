@@ -78,6 +78,7 @@ function checkWin(){
 app.use(express.static(__dirname + '/public'));
 
 io.sockets.on('connection', function (socket) {
+var canClick = true;
 	count++;
 	 io.sockets.emit('user_count', {
 	        number: count
@@ -105,7 +106,12 @@ io.sockets.on('connection', function (socket) {
 	            number: count
 	        });
 	    });
-	socket.on('paint', function(msg){		
+	socket.on('paint', function(msg){	
+	 if(canClick){
+        canClick = false;
+         setTimeout(function () {
+            canClick= true;
+          }, 200);	
 		if(canPlace(msg.posX,msg.posY,pmap[teamID])){
 			if( data[msg.posY][msg.posX] == 0){
             	data[msg.posY][msg.posX] = pmap[teamID];
@@ -123,6 +129,7 @@ io.sockets.on('connection', function (socket) {
 	    		pClicks:playerClicks
 			});
     	}
+    }
 	});
 });
 http.listen(port, function(){
