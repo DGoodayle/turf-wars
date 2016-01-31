@@ -67,17 +67,18 @@ function createDrawingArea() {
     canvasGrid.crop(new Phaser.Rectangle(0, 0, spriteWidth * canvasZoom, spriteHeight * canvasZoom));
 
 }
+var canClick = true;
 function onDown(pointer) { 
-    isDown = true;
-    if (pointer.rightButton.isDown)
-    {
-        isErase = true;
+    if(canClick){
+        canClick = false;
+        isDown = true;
+
+        paint(pointer);
+
+          setTimeout(function () {
+            canClick= true;
+          }, 200);
     }
-    else
-    {
-        isErase = false;
-    }
-    paint(pointer);
 }
 
 function refresh() {

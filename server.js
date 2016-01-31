@@ -61,10 +61,10 @@ function checkWin(){
         	if(data[y][x] == 0)
         		return;
         	if(data[y][x] == 11){
-        		g++;
+        		r++;
         	}
         	if(data[y][x] == 3){
-        		r++;
+        		g++;
         	}
         }
     }
