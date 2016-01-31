@@ -28,7 +28,7 @@ socket.on('data_updated', function(msg){
           $("#redWins").removeClass("blink");
               }, 500);
         $("#totalClicks").text(msg.total);
-        $("#yourClicks").text(msg.yourClicks)
+        $("#yourClicks").text(msg.pClicks)
         $("#greenWins").text(msg.gWins);
         $("#redWins").text(msg.rWins);
         refresh();
