@@ -49,6 +49,8 @@ function canPlace(x,y,teamID) {
 	south = data[y-1][x];
 	east = data[y][x+1];
 	west = data[y][x-1];
+
+	//If one of the adjacent nodes is either occupied by your team or is the edge, you can place. Else, you can't.
 	return north == teamID || south == teamID || east == teamID || west == teamID;
 }
 function checkWin(){
@@ -60,10 +62,10 @@ function checkWin(){
         {
         	if(data[y][x] == 0)
         		return;
-        	if(data[y][x] == 11){
+        	if(data[y][x] == pmap[11]){
         		r++;
         	}
-        	if(data[y][x] == 3){
+        	if(data[y][x] == pmap[3]){
         		g++;
         	}
         }
@@ -87,11 +89,9 @@ var canClick = true;
 	    		dataPacket : data,
 	    		total:totalClicks,
 	    		gWins:greenWins,
-	    		rWins:redWins,
-	    		pClicks:playerClicks
+	    		rWins:redWins
 			});
 	var teamID = nextTeamID;
-	var playerClicks = 0;
 	if(nextTeamID == 11){
 		nextTeamID=3;
 	} else if(nextTeamID == 3){
@@ -118,15 +118,13 @@ var canClick = true;
 			} else if( data[msg.posY][msg.posX] != pmap[teamID]){
             	data[msg.posY][msg.posX] = 0;
 			} 
-			playerClicks++;
 			totalClicks++;
 			checkWin();
     		io.sockets.emit('data_updated', {
 	    		dataPacket : data,
 	    		total:totalClicks,
 	    		gWins:greenWins,
-	    		rWins:redWins,
-	    		pClicks:playerClicks
+	    		rWins:redWins
 			});
     	}
     }
